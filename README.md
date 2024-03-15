@@ -136,6 +136,7 @@ Session 7 files
 ### Results:
 - Epochs: 15
 - Parameters: 7,528
+- Dropout: 0.02
 - Training Batch size: 64
 - Testing Batch size: 128
 - Training
@@ -148,7 +149,7 @@ Session 7 files
 
 ### Analysis:
 - Receptive field of 28 equal to the image size gives us good results
-- Lower Dropout is giving us good results since params are already quite low
+- Lower Dropout is giving us good results since params are already quite low - 0.02
 - Accuracy has gone up and consistently matching our target
 - Did not see any overfitting based on the batch normalization, dropout and image transforms used
 - Used higher learning rate to get faster convergence due to smaller model
