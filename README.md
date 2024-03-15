@@ -124,30 +124,35 @@ Session 7 files
 ### Target:
 - Look at images and use different image augmentations as per that to increase training complexity
   - Center Crop: 24 size crop to remove the outside 4 pixels to remove some edges
-  - Image rotation: Checked and image rotation of +-20% seemed to be good
+  - Image rotation: Checked and image rotation of +-10% seemed to be good
   - Random perspective change
   - Changes like brightness, contrast, saturation, hue, etc to have different types of images
-- Use adaptive LR scheduler to help with adjusting learning rate with scaling factor of 0.2 (instead of 0.1 to learn a bit faster)
+- Changed the overall model to have increasing channels instead of the tree structure
+- Reduced the Dropout to a lower value - Try 0 to 0.1
+- Move Maxpool after 1st layer to get receptive field of 28
+- Use adaptive LR scheduler to help with adjusting learning rate
 - Changed the batch size for training to 64 from 128 for it to backward propogate more times within same number of epochs
-- Changed the model to have continuously increasing channels instead of increasing and decreasing
-- Multiple trials to understand how to improve accuracy
 
 ### Results:
 - Epochs: 15
 - Parameters: 7,528
 - Training Batch size: 64
-- Testing Batch size: 64
+- Testing Batch size: 128
 - Training
-  - Loss=0.0440
+  - Loss=0.0399
   - Batch_id=938
-  - Accuracy=98.63%
+  - Accuracy=98.84%
 - Testing
-  - Average loss: 0.0189
-  - Accuracy: 9940/10000 (99.40%)
-LR Rate: 0.002 
+  - Average loss: 0.0199
+  - Accuracy: 9945/10000 (99.45%)
 
 ### Analysis:
-- Tried multiple techniques but need to have more tools and techniques to further improve
+- Receptive field of 28 equal to the image size gives us good results
+- Lower Dropout is giving us good results since params are already quite low
+- Accuracy has gone up and consistently matching our target
+- Did not see any overfitting based on the batch normalization, dropout and image transforms used
+- Used higher learning rate to get faster convergence due to smaller model
+- Further improvement possible with additional techniques and additional image augmentations that will need to be added to the training data
 - Accuracy has gone up and consistently matching our target
 - Did not see any overfitting
 - Look at the test related data that is still not getting right accuracy and based on that take some steps
